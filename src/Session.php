@@ -30,7 +30,11 @@ class Session implements SessionInterface
 
     public function has(string $key): bool
     {
-        return array_key_exists($key, $_SESSION);
+        if (isset($_SESSION)) {
+            return array_key_exists($key, $_SESSION);
+        } else {
+            return false;
+        }
     }
 
     public function forget(string $key): void
@@ -40,7 +44,11 @@ class Session implements SessionInterface
 
     public function get(string $key, mixed $default = null): mixed
     {
-        return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $default;
+        if (isset($_SESSION)) {
+            return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $default;
+        } else {
+            return $default;
+        }
     }
 
     public function start(): bool
