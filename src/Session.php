@@ -10,8 +10,8 @@ use Kaufmannmax\Session\Exception\SessionException;
 class Session implements SessionInterface
 {
     public function __construct(
-        public bool            $startsession = false,
-        public readonly Config $config = new Config()
+        public readonly Config $config = new Config(),
+        public bool            $startsession = false
     ) {
         if ($this->startsession) {
             $this->start();
@@ -79,19 +79,5 @@ class Session implements SessionInterface
     public function isActive(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
-    }
-
-    public function flash(string $key, array $messages): void
-    {
-        $_SESSION[$this->config->flashname][$key] = $messages;
-    }
-
-    public function getFlash(string $key): array
-    {
-        $messages = $_SESSION[$this->config->flashname][$key] ?? [];
-
-        unset($_SESSION[$this->config->flashname][$key]);
-
-        return $messages;
     }
 }
