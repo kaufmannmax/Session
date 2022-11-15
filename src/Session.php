@@ -10,14 +10,9 @@ use Kaufmannmax\Session\Exception\SessionException;
 class Session implements SessionInterface
 {
     public function __construct(
-        public string          $token = '',
         public bool            $startsession = false,
         public readonly Config $config = new Config()
     ) {
-        if ($this->token == '') {
-            $this->token = $_SESSION['token'] ?? '';
-        }
-
         if ($this->startsession) {
             $this->start();
         }
