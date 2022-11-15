@@ -34,3 +34,6 @@ jobs:
 
     - name: Psalm
       run: ./vendor/bin/psalm --config=tests/psalm.xml
+
+    - name: PHPStan
+      run: ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon
